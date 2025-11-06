@@ -1,0 +1,37 @@
+.signup{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    height: 100vh;
+}
+.loginOpt{
+    background-color: #e6f3ff;
+    border: 1px solid ;
+    padding: 10px 20px;
+    border-radius: 6px;
+    width: 320px;
+}
+
+.card{
+    background-color: white;
+    text-align: center;
+    width: 320px;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+.signup input.form-control {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.signup button.btn-primary {
+    border-radius: 20px;
+}
+
