@@ -3,15 +3,19 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
-    height: 100vh;
+    height: 90vh;
 }
+
 .loginOpt{
     background-color: #e6f3ff;
     border: 1px solid ;
     padding: 10px 20px;
     border-radius: 6px;
     width: 320px;
+}
+
+.loginOpt:hover{
+    background-color: #a5c8eb;
 }
 
 .card{
@@ -35,3 +39,12 @@
     border-radius: 20px;
 }
 
+
+.signup h2 {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
