@@ -2,7 +2,11 @@ import React from 'react'
 
 const WelcomePage = () => {
   return (
-    <div>Welcome to Expense Tracker</div>
+    <>
+      <div>Welcome to Expense Tracker</div>
+      
+    </>
+  
   )
 }
 
