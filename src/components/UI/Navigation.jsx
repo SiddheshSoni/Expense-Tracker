@@ -12,7 +12,6 @@ const Navigation = () => {
             <Nav className='mx-auto'>
                 <Nav.Link href='/Profile' >Profile</Nav.Link>
             </Nav>
-                <Nav.Link href='#' className='m-2' >Your Profile is incomplete. Complete now </Nav.Link>
                 <Button onClick={onLogout} >Logout</Button>
         </Navbar>
     </>

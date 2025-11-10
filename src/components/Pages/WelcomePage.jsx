@@ -1,5 +1,5 @@
 import React,{useEffect, useState}from 'react'
-import { Alert, Button } from 'react-bootstrap'
+import { Alert, Button, Col, Container, Row } from 'react-bootstrap'
 import {VerifyEmail} from '../API/VerifyEmail'
 import { FetchProfile } from '../API/UpdateProfile';
 
@@ -33,12 +33,23 @@ const WelcomePage = () => {
   };
   return (
     <>
-      <div>Welcome to Expense Tracker</div>
-      <div className='d-flex justify-content-center align-items-center h-100 w-100'>
-        {userData && userData.emailVerified ?<h1>Email is Verified! Good to go!</h1>:<Button className='' variant='danger' size='lg' onClick={clickHandler}>Verify Email id</Button>}
-  
-      {error && <Alert>{error}</Alert>}
-      </div>
+      <Container>
+
+      <Row>
+        <Col>
+          < div>Welcome to Expense Tracker</div>
+        </Col>
+        <Col>
+          <div className='d-flex justify-content-center align-items-center h-100 w-100'>
+            {userData && userData.emailVerified ?<h1>Email is Verified! Good to go!</h1>:<Button className='' variant='danger' size='lg' onClick={clickHandler}>Verify Email id</Button>}
+          {error && <Alert>{error}</Alert>}
+          </div>
+        </Col>
+        <Col>
+          <div><span href='#' className='m-2' >Your Profile is incomplete. <a href='#'>Complete now</a> </span></div>
+        </Col>
+      </Row>
+      </Container>
     </>
   
   )
