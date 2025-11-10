@@ -32,6 +32,7 @@ const ProfilePage = () => {
             setError(result.error);
         }else{
             setUserData(result.data.users[0]);
+            console.log(userData)
         }
     }
     useEffect(()=>{
