@@ -33,7 +33,11 @@ const SignUp = () => {
 
         const result = await SignUpAPI(enteredEmail, enteredPassword, isSignUp);
         if (!result.ok) {
-            setError(result.error);
+            if(result.error == "INVALID_LOGIN_CREDENTIALS"){
+                setError("Username or Password is Invalid!")
+            }else{
+                setError(result.error);
+            }
         }else{
             onLogin(result.data.idToken);
             navigate("/Welcome")
@@ -66,6 +70,7 @@ const SignUp = () => {
                         {error}
                         </Alert>
                     )}
+                    { !isSignUp && <a href='/ForgotPassword'>Forgot Password?</a>}
                 </Form>
             </div>
             <div className='loginOpt text-center mt-3'>

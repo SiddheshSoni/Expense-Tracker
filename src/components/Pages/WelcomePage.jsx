@@ -1,6 +1,6 @@
 import React,{useEffect, useState}from 'react'
 import { Alert, Button, Col, Container, Row } from 'react-bootstrap'
-import {VerifyEmail} from '../API/VerifyEmail'
+import {SendOobCode} from '../API/VerifyEmail'
 import { FetchProfile } from '../API/UpdateProfile';
 
 const WelcomePage = () => {
@@ -22,13 +22,13 @@ const WelcomePage = () => {
   },[]);
 
   const clickHandler= async () =>{
-    const result = await VerifyEmail();
+    const result = await SendOobCode("VERIFY_EMAIL");
     
     if(!result.ok){
       setError(result.error);
     }
     else{
-      console.log(`Check Email for Verification code" }`)
+      console.log(`Check Email for Verification code`)
     }
   };
   return (

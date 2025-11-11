@@ -1,15 +1,21 @@
 import React from "react";
 const API_key ="AIzaSyC_T56zHD0P7_bI1MwqhUjBNCpO46JlbC8";
 
-const VerifyEmail = async () =>{
+const SendOobCode = async ( requestType, Email ) =>{
     const token = localStorage.getItem('token');
-
+    let reqPay = {
+        requestType: requestType,
+    }
+    if (Email) {
+        reqPay.email = Email;
+    } else {
+        reqPay.idToken = token;
+    }
     try{
         const res = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${API_key}`,{
             method:'POST',
             body:JSON.stringify({
-                requestType:"VERIFY_EMAIL",
-                idToken: token,
+                ...reqPay,
                 returnSecureToken:true
             }),
             headers:{
@@ -68,4 +74,4 @@ const VerifyEmail = async () =>{
 //     // }
 // };
 
-export { VerifyEmail};
+export { SendOobCode};

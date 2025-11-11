@@ -21,9 +21,10 @@ const SignUpAPI = async (email, password, isSignUp)=>{
         });
  
         const data = await res.json();
+        console.log(data);
  
         if(res.ok){
-            console.log(data.idToken);
+            // console.log(data.idToken);
             return { ok: true, data: data };
         } else {
             let errorMessage = "Authentication Failed";
