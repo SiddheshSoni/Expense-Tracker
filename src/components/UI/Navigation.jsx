@@ -11,6 +11,7 @@ const Navigation = () => {
             {/* <Navbar.Brand className=''> Expense Tracker </Navbar.Brand> */}
             <Nav className='mx-auto'>
                 <Nav.Link href='/Profile' >Profile</Nav.Link>
+                <Nav.Link href='/Expenses' >Expense</Nav.Link>
             </Nav>
                 <Button onClick={onLogout} >Logout</Button>
         </Navbar>

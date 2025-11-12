@@ -41,15 +41,15 @@ const ProfilePage = () => {
 
   return (
     <>
-        <div className='d-flex justify-content-center align-content-center mt-5'> 
+        <div className='filler d-flex justify-content-center align-content-center pt-lg-5'> 
             <Form onSubmit={submitHandler}>
                 <Row className='mb-3'>   
                     <FormGroup>
-                        <FormLabel><img src='github-mark.png' /> Full Name:</FormLabel>                       
+                        <FormLabel><img src='github-mark-white.png' /> Full Name:</FormLabel>                       
                         <FormControl type='text' defaultValue={userData? userData.displayName : ''} ref={nameRef}/>
                     </FormGroup>                    
                     <FormGroup>
-                        <FormLabel><img src='globe-network.png' /> Profile Photo URL:</FormLabel>
+                        <FormLabel><img src='global-network.png' /> Profile Photo URL:</FormLabel>
                         <FormControl type='URL' defaultValue={ userData? userData.photoUrl : ''} ref={pfpRef}/>
                     </FormGroup>
                 </Row>

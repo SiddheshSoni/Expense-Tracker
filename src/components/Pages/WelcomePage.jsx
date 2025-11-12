@@ -2,6 +2,8 @@ import React,{useEffect, useState}from 'react'
 import { Alert, Button, Col, Container, Row } from 'react-bootstrap'
 import {SendOobCode} from '../API/VerifyEmail'
 import { FetchProfile } from '../API/UpdateProfile';
+import "./Filler.css"
+import { Link } from 'react-router';
 
 const WelcomePage = () => {
   const [error, setError] = useState(null);
@@ -32,26 +34,23 @@ const WelcomePage = () => {
     }
   };
   return (
-    <>
-      <Container>
-
-      <Row>
-        <Col>
-          < div>Welcome to Expense Tracker</div>
-        </Col>
-        <Col>
-          <div className='d-flex justify-content-center align-items-center h-100 w-100'>
-            {userData && userData.emailVerified ?<h1>Email is Verified! Good to go!</h1>:<Button className='' variant='danger' size='lg' onClick={clickHandler}>Verify Email id</Button>}
-          {error && <Alert>{error}</Alert>}
-          </div>
-        </Col>
-        <Col>
-          <div><span href='#' className='m-2' >Your Profile is incomplete. <a href='#'>Complete now</a> </span></div>
-        </Col>
-      </Row>
-      </Container>
-    </>
-  
+      <div className='filler'>
+        <Row className='mb-3 mx-3'>
+          <Col>
+            < div>Welcome to Expense Tracker</div>
+          </Col>
+          <Col className='text-end'>
+            <span>Your Profile is incomplete. </span>
+            <Link to='/Profile' style={{  color: 'antiquewhite' }} > Complete Now</Link>
+          </Col>
+        </Row>
+        <Row className='mb-3 '>
+          <Col className='text-center'>          
+            {userData && userData.emailVerified ?<h1>Email is Verified! Good to go!</h1>:<Button variant='danger' size='lg' onClick={clickHandler}>Verify Email id</Button>}
+            {error && <Alert>{error}</Alert>}       
+          </Col>     
+        </Row>
+      </div>
   )
 }
 
