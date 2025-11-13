@@ -28,7 +28,7 @@ export const StoreProvider = (props) => {
 
     return(
         <StoreContext.Provider value={defaultVal}>
-            {console.log(localStorage.getItem('token'))}
+            {/* {console.log(localStorage.getItem('token'))} */}
             {props.children}
         </StoreContext.Provider>
     )

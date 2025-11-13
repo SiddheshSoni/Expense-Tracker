@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Row, Col, Form, FormControl, FormGroup, FormLabel, FormSelect, Button } from 'react-bootstrap'
 import "./Expenses.css"
-import { AddExpenseDB, GetExpenseDB } from '../API/ExpenseDB';
+import { AddExpenseDB, DeleteExpenseDB, GetExpenseDB, EditExpenseDB } from '../API/ExpenseDB';
 const Expenses = () => {
     const [expenses, setExpenses] = useState([]);
     const amountRef = useRef();
@@ -12,7 +12,7 @@ const Expenses = () => {
 
     const loadData = async () =>{
         const result = await GetExpenseDB();
-        console.log(JSON.stringify(result.data));
+        // console.log(JSON.stringify(result.data));
         // setExpenses(JSON.stringify(result.data));
 
         const dataObj = result.data || {};
@@ -22,6 +22,7 @@ const Expenses = () => {
             ...dataObj[key],
         }));
         setExpenses(list);
+        // console.log(list);
     }
     useEffect(()=>{
         loadData();
@@ -55,6 +56,38 @@ const Expenses = () => {
             console.log(`Successful!`)
         }
     }
+
+    const editBtnHandler=async (id)=>{
+        const exp = expenses.find(item => item.id == id);
+        
+        if(!exp) return;
+
+        amountRef.current.value = exp.amount ??'';
+        descRef.current.value = exp.desc ??'';
+        categoryRef.current.value = exp.cat ??'';
+
+        const result = await EditExpenseDB(id);
+         if(!result.ok){
+            setError(result.error);
+            console.log(error);
+        }
+        else{
+            console.log(`Successful!`)
+        }
+        // loadData();
+    };
+
+    const deleteBtnHandler= async (id)=>{ 
+        const result = await DeleteExpenseDB(id);
+         if(!result.ok){
+            setError(result.error);
+            console.log(error);
+        }
+        else{
+            console.log(`Successful!`)
+        }
+        loadData();
+    };
 
   return (
     <>
@@ -112,7 +145,10 @@ const Expenses = () => {
                 <span>{expense.date}</span>
             </Col>
             <Col sm={2} className='expense-category'>
-                <Button >X</Button>
+                <Button onClick={()=>deleteBtnHandler(expense.id)} >X</Button>
+            </Col>
+            <Col sm={2} className='expense-category'>
+                <Button onClick={()=>editBtnHandler(expense.id)} >E</Button>
             </Col>
         </Row>
         )}
