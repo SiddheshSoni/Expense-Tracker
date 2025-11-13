@@ -1,15 +1,14 @@
 .expenses{
     text-align: center;
     font-size: 2rem;
+    /* background-color: rgb(86, 134, 177); */
 }
-.expense-amount {
-    background-color: rgb(87, 122, 199);
-}
-.expense-desc {
-    background-color: rgb(87, 122, 199);
-    
-}
-.expense-category{
-    background-color: rgb(87, 122, 199);
-    
+
+
+.addExpense{
+    background-color: rgb(86, 134, 177);
+    padding: 20px;
+    border-radius: 20px;
+    /* box-shadow: 0px px 8px rgba(0, 0, 0, 0.3); */
+
 }

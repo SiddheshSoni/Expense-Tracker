@@ -7,7 +7,7 @@ const Navigation = () => {
 
   return (
     <>
-        <Navbar className='navbar-light bg-body-tertiary'>
+        <Navbar className='navbar-light bg-body-tertiary fixed-top'>
             {/* <Navbar.Brand className=''> Expense Tracker </Navbar.Brand> */}
             <Nav className='mx-auto'>
                 <Nav.Link href='/Profile' >Profile</Nav.Link>
