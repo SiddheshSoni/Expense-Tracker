@@ -1,5 +1,7 @@
 html, body, #root {
   height: 100%;
   margin: 0;
-  background: #0f172a; /* set your page background (match nav) */
+  background-color: var(--bs-body-bg);
+  transition: background-color 0.3s ease;
+  /* set your page background (match nav) */
 }

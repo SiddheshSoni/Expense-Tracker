@@ -1,6 +1,6 @@
 .filler{
     background-color: inherit;
-    color: white;
+    /* color: white; */
     min-height: calc(100vh);
     margin-top: 90px;
     /* padding-top: 90px; */
