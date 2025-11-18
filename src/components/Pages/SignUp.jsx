@@ -1,11 +1,15 @@
-import React, { useState, useRef, useContext } from 'react'
+import React, { useState, useRef } from 'react'
 import { Form, FormControl, Container,Alert, Row, Button } from 'react-bootstrap'
 import "./SignUp.css"
 import SignUpAPI from '../API/Auth';
-import { StoreContext } from '../Store/StoreContext';
+
 import { Navigate, useNavigate } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { authActions } from '../Store/authSlice';
 
 const SignUp = () => {
+    const dispatch = useDispatch();
+
     const emailRef = useRef();
     const passwordRef = useRef();
     const confirmPasswordRef = useRef();
@@ -13,7 +17,6 @@ const SignUp = () => {
     const [isSignUp, setIsSignUp] = useState(true);
 
     const navigate = useNavigate();
-    const { onLogin } = useContext(StoreContext);
 
     const submitHandler= async (e)=>{
         e.preventDefault();    
@@ -39,7 +42,7 @@ const SignUp = () => {
                 setError(result.error);
             }
         }else{
-            onLogin(result.data.idToken);
+            dispatch(authActions.onLogin(result.data.idToken))
             navigate("/Welcome")
             console.log(`User has succesfully ${isSignUp ? "Signed up" : "Logged in" }`)
         }

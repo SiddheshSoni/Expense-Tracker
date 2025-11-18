@@ -1,16 +1,16 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import './App.css'
 import Navigation from './components/UI/Navigation'
 import { Routes, Route, Navigate } from 'react-router'
 import WelcomePage from './components/Pages/WelcomePage'
-import { StoreContext } from './components/Store/StoreContext'
 import ProfilePage from './components/Pages/ProfilePage'
 import ForgotPasswordPage from './components/Pages/ForgotPassPage'
 import Expenses from './components/Pages/Expenses'
 import SignUp from './components/Pages/SignUp'
+import { useSelector } from 'react-redux'
 
 function App() {
-  const { isLoggedIn } = useContext(StoreContext);
+  const isLoggedIn = useSelector(state=> state.auth.isLoggedIn);
 
   return (
     <>

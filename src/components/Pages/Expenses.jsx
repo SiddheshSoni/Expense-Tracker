@@ -2,8 +2,13 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Row, Col, Form, FormControl, FormGroup, FormLabel, FormSelect, Button } from 'react-bootstrap'
 import "./Expenses.css"
 import { AddExpenseDB, DeleteExpenseDB, GetExpenseDB, EditExpenseDB } from '../API/ExpenseDB';
+import { useDispatch, useSelector } from 'react-redux';
+import { expensesActions } from '../Store/expenseSlice';
 const Expenses = () => {
-    const [expenses, setExpenses] = useState([]);
+    const dispatch = useDispatch();
+    const expenses = useSelector(state => state.expense.expenses);
+    const expenseTotal = useSelector(state => state.expense.expenseTotal);
+
     const amountRef = useRef();
     const descRef = useRef();
     const dateRef = useRef();
@@ -21,7 +26,7 @@ const Expenses = () => {
             id: key,
             ...dataObj[key],
         }));
-        setExpenses(list);
+        dispatch(expensesActions.setExpenses(list));
         // console.log(list);
     }
     useEffect(()=>{
@@ -44,8 +49,6 @@ const Expenses = () => {
             date : formattedDate,
         };
 
-        setExpenses(prev => [...prev, newExpense]);
-
         const result = await AddExpenseDB(newExpense);
 
          if(!result.ok){
@@ -53,7 +56,10 @@ const Expenses = () => {
             console.log(error);
         }
         else{
-            console.log(`Successful!`)
+            // Add the new expense to Redux state only after successful DB save
+            // The 'name' property from Firebase is the unique ID for the new item
+            dispatch(expensesActions.addExpense({ ...newExpense, id: result.data.name }));
+            console.log(`Successfully added!`);
         }
     }
 
@@ -91,6 +97,9 @@ const Expenses = () => {
 
   return (
     <>
+    <div className="d-flex mb-3 justify-content-center align-content-center">
+    {expenseTotal>=10000?<Button variant='danger'>Activate Premium</Button>:null}
+    </div>
     <div className='addExpense pt-lg-5 mx-lg-5 '>
         <Form onSubmit={submitHandler}>
             <Row className='justify-content-center'>
@@ -129,6 +138,7 @@ const Expenses = () => {
             </Row>
         </Form>
     </div>
+    <div className='expenses'>Total: ₹{expenseTotal}</div>
     <div className='expenses pt-lg-5 mx-lg-5 '>
         {expenses && expenses.map((expense, index) =>
         <Row className='justify-content-center mb-3' key={index}>

@@ -1,4 +1,4 @@
-import React,{useEffect, useState}from 'react'
+import React, { useEffect, useState }from 'react'
 import { Alert, Button, Col, Container, Row } from 'react-bootstrap'
 import {SendOobCode} from '../API/VerifyEmail'
 import { FetchProfile } from '../API/UpdateProfile';

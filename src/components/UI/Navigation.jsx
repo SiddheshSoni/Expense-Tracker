@@ -1,9 +1,10 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Button, Nav, Navbar, NavbarBrand } from 'react-bootstrap'
-import { StoreContext } from '../Store/StoreContext'
+import { useDispatch } from 'react-redux'
+import { authActions } from '../Store/authSlice'
 
 const Navigation = () => {
-  const { onLogout } = useContext(StoreContext);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -13,7 +14,7 @@ const Navigation = () => {
                 <Nav.Link href='/Profile' >Profile</Nav.Link>
                 <Nav.Link href='/Expenses' >Expense</Nav.Link>
             </Nav>
-                <Button onClick={onLogout} >Logout</Button>
+                <Button onClick={()=>dispatch(authActions.onLogout())} >Logout</Button>
         </Navbar>
     </>
   )
