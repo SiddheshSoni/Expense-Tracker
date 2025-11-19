@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const isPremium = localStorage.getItem("premium");
+
 const initialState = {
-    premium : false,
+    premium : isPremium,
 }
 const premiumSlice = createSlice({
     name: 'premium',
@@ -9,6 +11,7 @@ const premiumSlice = createSlice({
     reducers:{
         togglePremium(state){
             state.premium = true;
+            localStorage.setItem("premium", true);
         }
     }
 });

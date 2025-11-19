@@ -11,21 +11,25 @@ import { useSelector } from 'react-redux'
 
 function App() {
   const isLoggedIn = useSelector(state=> state.auth.isLoggedIn);
+  
+  const isDark = useSelector(state => state.theme.isDark);
+
+  document.documentElement.setAttribute("data-bs-theme", isDark? "dark":"light"); ////
 
   return (
-    <>
+    <div className={isDark ? 'dark' : ''}>
       { isLoggedIn && <Navigation />}
       <div className='filler'>
       <Routes>
         <Route path='/' element={ <SignUp />} />
         {isLoggedIn && <Route path='/Profile' element={ <ProfilePage />} />}
-        {isLoggedIn && <Route path='/ForgotPassword' element={ <ForgotPasswordPage />} />}
+        <Route path='/ForgotPassword' element={ <ForgotPasswordPage />} />
         {isLoggedIn && <Route path='/Expenses' element={ <Expenses />} />}
         {isLoggedIn && <Route path='/Welcome' element={<WelcomePage />} />}
         <Route path='*' element={<Navigate to='/' replace />} />
       </Routes>
       </div>
-    </>
+    </div>
   )
 }
 

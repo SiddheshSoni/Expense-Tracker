@@ -2,8 +2,11 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Alert, Button, Col, Form, FormControl, FormGroup, FormLabel, Row } from 'react-bootstrap'
 import "./ProfilePage.css";
 import {UpdateProfile, FetchProfile } from '../API/UpdateProfile';
+import { useSelector } from 'react-redux';
 
 const ProfilePage = () => {
+    const isDark = useSelector(state=> state.theme.isDark);
+
     const nameRef = useRef();
     const pfpRef = useRef();
     const [error, setError] = useState(null);
@@ -45,7 +48,7 @@ const ProfilePage = () => {
             <Form onSubmit={submitHandler}>
                 <Row className='mb-3'>   
                     <FormGroup>
-                        <FormLabel><img src='github-mark-white.png' /> Full Name:</FormLabel>                       
+                        <FormLabel><img src={isDark ? 'github-mark-white.png' : 'github-mark.png'} /> Full Name:</FormLabel>                       
                         <FormControl type='text' defaultValue={userData? userData.displayName : ''} ref={nameRef}/>
                     </FormGroup>                    
                     <FormGroup>

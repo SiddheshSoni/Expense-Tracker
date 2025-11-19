@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { expensesActions } from '../Store/expenseSlice';
 import { premiumActions } from '../Store/premiumSlice';
 import { themeActions } from '../Store/themeSlice';
+import { CSVLink } from 'react-csv';
 
 const Expenses = () => {
     const dispatch = useDispatch();
@@ -35,6 +36,7 @@ const Expenses = () => {
     }
     useEffect(()=>{
         loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     const submitHandler= async (e) =>{
@@ -66,40 +68,16 @@ const Expenses = () => {
             console.log(`Successfully added!`);
         }
     }
+        
+    
+    
+    const headers = [
+        {label: "Date", key: "date"},
+        {label: "Amount", key: "amount"},
+        {label: "Description", key: "desc"},
+        {label: "Category", key: "cat"},
 
-    const downloadCSVHandler = () => {
-        if (expenses.length === 0) {
-            alert("No expenses to download.");
-            return;
-        }
-
-        // Define CSV Headers
-        const headers = ['Date', 'Category', 'Description', 'Amount'];
-
-        // Map expenses to CSV rows, ensuring values are properly formatted
-        const csvRows = expenses.map(expense => {
-            // Helper function to safely wrap a value in quotes for CSV
-            const escapeCSV = (value) => `"${String(value).replace(/"/g, '""')}"`;
-
-            return [
-                escapeCSV(expense.date),
-                escapeCSV(expense.cat),
-                escapeCSV(expense.desc),
-                escapeCSV(expense.amount)
-            ].join(',')
-        });
-
-        // Combine headers and rows into a single string
-        const csvString = [headers.join(','), ...csvRows].join('\n');
-        const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.setAttribute('href', url);
-        link.setAttribute('download', 'expenses.csv');
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    };
+    ];
 
     const editBtnHandler=async (id)=>{
         const exp = expenses.find(item => item.id == id);
@@ -138,12 +116,24 @@ const Expenses = () => {
     <div className="d-flex mb-3 justify-content-center align-content-center">
         {!isPremium && expenseTotal >= 10000 && <Button variant='danger' onClick={()=> {
             dispatch(premiumActions.togglePremium());
-            dispatch(themeActions.toggleTheme()); 
+            dispatch(themeActions.toggleTheme());
         }
         } className='me-3'>Activate Premium</Button>}
-        {isPremium && expenses.length > 0 && (
-            <Button variant="success" onClick={downloadCSVHandler}>Download as CSV</Button>
+        {isPremium && (
+            <CSVLink
+            className='csvbtn'
+            data={expenses} headers={headers} 
+            onClick={()=>{
+                if (expenses.length === 0) {
+                    alert("No expenses to download.");
+                    return false;
+                }else{ 
+                    return true;
+                }
+            }}
+            >Download as CSV</CSVLink>
         )}
+
     </div>
     <div className='addExpense pt-lg-5 mx-lg-5 '>
         <Form onSubmit={submitHandler}>

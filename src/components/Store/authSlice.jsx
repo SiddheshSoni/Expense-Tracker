@@ -21,6 +21,8 @@ const AuthSlice =createSlice( {
             state.idToken = null;
             state.isLoggedIn = false;
             localStorage.removeItem('token');
+            localStorage.removeItem('premium');
+            localStorage.removeItem('isDark');
         }
     }
 });
